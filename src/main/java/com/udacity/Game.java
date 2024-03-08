@@ -151,31 +151,40 @@ public class Game {
     public String checkGameWinner(char [][]grid){
         String result = "None";
         //Student code goes here ...
+
+
         // check for Win and Tie
-        int emptySpaces = 9;
+
+        // check for columns
 
         for (int col = 0; col < grid[0].length;col++) {
-            for (int row = 0; row < grid.length; row++) {
-                //check for columns
-                if ((grid[0][col] == turn) && (grid[1][col] == turn) && (grid[2][col] == turn)) {
-                    result = turn + " wins";
-                }
-                // check for rows
-                else if (grid[row][0] == turn && grid[row][1] == turn && grid[row][2] == turn) {
-                    result = turn + " wins";
-                }
-                // check for diagonal
-                else if (grid[0][0] == turn && grid[1][1] == turn && grid[2][2] == turn) {
-                    result = turn + " wins";
-                }
-                else if (grid[0][2] == turn && grid[1][1] == turn && grid[2][0] == turn)
-                    result = turn + " wins";
+            if ((grid[0][col] == turn) && (grid[1][col] == turn) && (grid[2][col] == turn)) {
+                result = turn + " wins";
+            }
+        }
 
-                // check for Tie
+        // check for rows
+        for (int row = 0; row < grid.length; row++) {
+            if (grid[row][0] == turn && grid[row][1] == turn && grid[row][2] == turn) {
+                result = turn + " wins";
+            }
+        }
 
-                if (grid[col][row] != '-') {
-                    emptySpaces--;
-                    if(emptySpaces == 0) {
+        // check for diagonal
+        if (grid[0][0] == turn && grid[1][1] == turn && grid[2][2] == turn) {
+            result = turn + " wins";
+        }
+
+        if (grid[0][2] == turn && grid[1][1] == turn && grid[2][0] == turn) {
+            result = turn + " wins";
+        }
+
+        // check for Tie
+        for (int c = 0; c < grid[0].length;c++) {
+            for (int r = 0; r < grid.length; r++) {
+
+                if (grid[c][r] != '-') {
+                    if(freeSpots == 0) {
                         result = "Tie";
                     }
                 }
